@@ -31,9 +31,10 @@ const Users = db.define("users", {
     type: DataTypes.STRING,
     allowNull: false
   },
-  profile_image: {
+  profileImage: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    field: 'profile_image',
   },
   phone: {
     type: DataTypes.STRING, // +52 

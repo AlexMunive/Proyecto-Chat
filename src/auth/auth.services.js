@@ -15,7 +15,7 @@ const login = (req, res) => {
                     const token = jwt.sign({
                         id: response.id,
                         email: response.email,
-                        role: response.role
+                        // role: response.role
                     }, jwtSecret)
                     res.status(200).json({
                         message: 'Correct Credentials',
