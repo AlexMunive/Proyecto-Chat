@@ -13,6 +13,7 @@ const Users = db.define("users", {
     allowNull: false,
     field: "first_name",
   },
+  
   lastName: {
     type: DataTypes.STRING,
     allowNull: false,
