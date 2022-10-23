@@ -33,8 +33,7 @@ const Users = db.define("users", {
   },
   profileImage: {
     type: DataTypes.STRING,
-    allowNull: false,
-    field: 'profile_image',
+    field: "profile_image",
   },
   phone: {
     type: DataTypes.STRING, // +52
@@ -49,13 +48,13 @@ const Users = db.define("users", {
   status: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: 'active'
+    defaultValue: "active",
   },
   isVerified: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    field: 'is_verified',
-    defaultValue: false
+    field: "is_verified",
+    defaultValue: false,
   },
 });
 

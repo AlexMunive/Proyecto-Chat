@@ -1,3 +1,4 @@
+
 const Conversations = require("../models/conversations.models");
 
 const getAllConversation = async () => {
@@ -18,7 +19,7 @@ const createConversation = async (data) => {
   const response = await Conversations.create({
     title: data.title,
     imageUrl: data.imageUrl,
-    createdBy: data.createdBy,
+    userId: data.userId,
   });
   return response;
 };
@@ -45,4 +46,5 @@ module.exports = {
   getConversationByName,
   createConversation,
   deleteConversation,
+  updateConversation,
 };

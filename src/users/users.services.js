@@ -24,16 +24,10 @@ const getUserById = (req, res) => {
 };
 
 const registerUser = (req, res) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-    profileImage,
-    phone,
-  } = req.body;
+  const { firstName, lastName, email, password, profileImage, phone } =
+    req.body;
 
-  if (firstName && lastName && email && password && profileImage && phone) {
+  if (firstName && lastName && email && password && phone) {
     //? Ejecutamos el controller
     usersControllers
       .createUser({
