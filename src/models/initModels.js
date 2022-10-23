@@ -7,6 +7,8 @@ const initModels = () => {
   Conversations.belongsTo(Users);
   //Un usuario puede crear una o muchas conversaciones
   Users.hasMany(Conversations);
+
+
 };
 
 module.exports = initModels;

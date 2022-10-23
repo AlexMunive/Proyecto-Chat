@@ -33,7 +33,7 @@ const registerUser = (req, res) => {
     phone,
   } = req.body;
 
-  if (firstName && lastName && email && password && profileImage && phone) {
+  if (firstName && lastName && email && password && phone) {
     //? Ejecutamos el controller
     usersControllers
       .createUser({
