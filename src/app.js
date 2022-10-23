@@ -8,7 +8,7 @@ const { port } = require("./config");
 const userRouter = require("./users/users.router");
 const authRouter = require("./auth/auth.router");
 const initModels = require("./models/initModels");
-const conversationRouter = require("./conversations/conversations.router");
+const messageRouter = require("./messages/messages.router");
 
 //? Initial Configs
 const app = express();
@@ -40,9 +40,16 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "OK!",
+    users: `localhost:${port}/api/v1/users`,
+  });
+});
+
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/conversation", conversationRouter);
+app.use("/api/v1/message", messageRouter);
 
 app.listen(port, () => {
   console.log(`Server started at port ${port}`);

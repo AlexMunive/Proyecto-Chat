@@ -1,4 +1,5 @@
 const Users = require("./users.models");
+const Messages = require("./message.models");
 const Conversations = require("./conversations.models");
 
 const initModels = () => {

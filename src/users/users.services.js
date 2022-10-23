@@ -24,17 +24,25 @@ const getUserById = (req, res) => {
 };
 
 const registerUser = (req, res) => {
-  const { firstName, lastName, email, password, phone, birthday } = req.body;
-  if (firstName && lastName && email && password && phone && birthday) {
-    //ejecutamos el controller
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    profileImage,
+    phone,
+  } = req.body;
+
+  if (firstName && lastName && email && password && profileImage && phone) {
+    //? Ejecutamos el controller
     usersControllers
       .createUser({
         firstName,
         lastName,
         email,
         password,
+        profileImage,
         phone,
-        birthday,
       })
       .then((data) => {
         res.status(201).json(data);
@@ -51,8 +59,8 @@ const registerUser = (req, res) => {
         lastName: "string",
         email: "example@example.com",
         password: "string",
-        phone: "+581231231231",
-        birthday: "YYY/MM/DD",
+        profileImage: "string",
+        phone: "+521231231231",
       },
     });
   }
@@ -60,16 +68,10 @@ const registerUser = (req, res) => {
 
 const patchUser = (req, res) => {
   const id = req.params.id;
-  const { firstName, lastName, phone, birthday, gender, country } = req.body;
+  const { firstName, lastName, profileImage, phone } = req.body;
+
   usersControllers
-    .updateUser(id, {
-      firstName,
-      lastName,
-      phone,
-      birthday,
-      gender,
-      country,
-    })
+    .updateUser(id, { firstName, lastName, profileImage, phone })
     .then((data) => {
       if (data[0]) {
         res
@@ -115,18 +117,12 @@ const getMyUser = (req, res) => {
 
 const patchMyUser = (req, res) => {
   const id = req.user.id;
-  const { firstName, lastName, phone, birthday, gender, country } = req.body;
+  const { firstName, lastName, profileImage, phone } = req.body;
+
   usersControllers
-    .updateUser(id, {
-      firstName,
-      lastName,
-      phone,
-      birthday,
-      gender,
-      country,
-    })
-    .then((data) => {
-      res.status(200).json({ message: `Your user was edited succesfully` });
+    .updateUser(id, { firstName, lastName, profileImage, phone })
+    .then(() => {
+      res.status(200).json({ message: `Your user was edited succesfully!` });
     })
     .catch((err) => {
       res.status(400).json({ message: err.message });
