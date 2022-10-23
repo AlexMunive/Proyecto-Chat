@@ -41,6 +41,17 @@ const Users = db.define("users", {
     allowNull: false,
     unique: true
   },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: 'active'
+  },
+  isVerified: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    field: 'is_verified',
+    defaultValue: false
+  },
 });
 
 module.exports = Users
