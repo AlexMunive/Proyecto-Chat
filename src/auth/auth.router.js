@@ -1,17 +1,17 @@
-//? Auth va a contener las rutas de autorizacion y autenticacion
-//* Login
-//* Register
-//* Recovery Password
-//* Verify User
+//auth va a contener las rutas de autorizacion y autenticacion
+/*
+ *login
+ *register
+ *recovery password
+ *verify user
+ */
 
-const router = require('express').Router()
-const authServices = require('./auth.services')
-const {registerUser} = require('../users/users.services')
+const router = require("express").Router();
 
-//? /api/v1/auth
+const authServices = require("./auth.services");
+const { registerUser } = require("../users/users.services");
 
-router.post('/register', registerUser)
+router.post("/register", registerUser);
+router.post("/login", authServices.login);
 
-router.post('/login', authServices.login)
-
-module.exports = router
+module.exports = router;

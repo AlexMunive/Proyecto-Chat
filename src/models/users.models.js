@@ -13,7 +13,7 @@ const Users = db.define("users", {
     allowNull: false,
     field: "first_name",
   },
-  
+
   lastName: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -24,22 +24,27 @@ const Users = db.define("users", {
     allowNull: false,
     unique: true,
     validate: {
-        isEmail: true
-    }
+      isEmail: true,
+    },
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   profile_image: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true,
   },
   phone: {
-    type: DataTypes.STRING, // +52 
+    type: DataTypes.STRING, // +52
     allowNull: false,
-    unique: true
+    unique: true,
+  },
+  role: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "normal",
   },
 });
 
-module.exports = Users
+module.exports = Users;

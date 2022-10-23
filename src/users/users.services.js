@@ -3,8 +3,8 @@ const usersControllers = require("./users.controllers");
 const getAllUsers = (req, res) => {
   usersControllers
     .getAllUsers()
-    .then((data) => {
-      res.status(200).json(data);
+    .then((response) => {
+      res.status(200).json(response);
     })
     .catch((err) => {
       res.status(400).json({ message: err.message });
@@ -24,19 +24,9 @@ const getUserById = (req, res) => {
 };
 
 const registerUser = (req, res) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-    phone,
-    birthday,
-    gender,
-    country,
-  } = req.body;
-
+  const { firstName, lastName, email, password, phone, birthday } = req.body;
   if (firstName && lastName && email && password && phone && birthday) {
-    //? Ejecutamos el controller
+    //ejecutamos el controller
     usersControllers
       .createUser({
         firstName,
@@ -45,8 +35,6 @@ const registerUser = (req, res) => {
         password,
         phone,
         birthday,
-        gender,
-        country,
       })
       .then((data) => {
         res.status(201).json(data);
@@ -55,7 +43,7 @@ const registerUser = (req, res) => {
         res.status(400).json(err.message);
       });
   } else {
-    //? Error cuando no mandan todos los datos necesarios para crear un usuario
+    //error cuando no mandan lo necesario
     res.status(400).json({
       message: "All fields must be completed",
       fields: {
@@ -63,8 +51,8 @@ const registerUser = (req, res) => {
         lastName: "string",
         email: "example@example.com",
         password: "string",
-        phone: "+521231231231",
-        birthday: "YYYY/MM/DD",
+        phone: "+581231231231",
+        birthday: "YYY/MM/DD",
       },
     });
   }
@@ -72,15 +60,21 @@ const registerUser = (req, res) => {
 
 const patchUser = (req, res) => {
   const id = req.params.id;
-  const { firstName, lastName, phone, gender, country } = req.body;
-
+  const { firstName, lastName, phone, birthday, gender, country } = req.body;
   usersControllers
-    .updateUser(id, { firstName, lastName, phone, gender, country })
+    .updateUser(id, {
+      firstName,
+      lastName,
+      phone,
+      birthday,
+      gender,
+      country,
+    })
     .then((data) => {
       if (data[0]) {
         res
           .status(200)
-          .json({ message: `User with ID: ${id}, edited succesfully!` });
+          .json({ message: `User with ID: ${id}, edited succefully` });
       } else {
         res.status(404).json({ message: "Invalid ID" });
       }
@@ -89,7 +83,6 @@ const patchUser = (req, res) => {
       res.status(400).json({ message: err.message });
     });
 };
-
 const deleteUser = (req, res) => {
   const id = req.params.id;
   usersControllers
@@ -106,11 +99,10 @@ const deleteUser = (req, res) => {
     });
 };
 
-//? My user services
+//myUserServices
 
 const getMyUser = (req, res) => {
-  const id = req.user.id; //? req.user contiene la informacion del token desencriptado
-
+  const id = req.user.id; //req.user contiene la informacion del token desencriptado
   usersControllers
     .getUserById(id)
     .then((data) => {
@@ -121,36 +113,40 @@ const getMyUser = (req, res) => {
     });
 };
 
-// TODO crear rutas protegidas /me, con los verbos para update y delete
-
 const patchMyUser = (req, res) => {
   const id = req.user.id;
   const { firstName, lastName, phone, birthday, gender, country } = req.body;
-
   usersControllers
-    .updateUser(id, { firstName, lastName, phone, birthday, gender, country })
-    .then(() => {
-      res.status(200).json({ message: `Your user was edited succesfully!` });
+    .updateUser(id, {
+      firstName,
+      lastName,
+      phone,
+      birthday,
+      gender,
+      country,
+    })
+    .then((data) => {
+      res.status(200).json({ message: `Your user was edited succesfully` });
     })
     .catch((err) => {
       res.status(400).json({ message: err.message });
     });
 };
 
-//? 2 tipos de delete:
-//* 1. por administrador
-//* 2. por mi mismo
+//existen 2 tipos de delete
+// * 1 por administrador
+// * 2 por mi mismo
 
 const deleteMyUser = (req, res) => {
   const id = req.user.id;
-
-  usersControllers.updateUser(id, { status: "inactive" })
-      .then(() => {
-        res.status(200).json({ message: `Your user was deleted succesfully!` });
-      })
-      .catch((err) => {
-        res.status(400).json({ message: err.message });
-      });
+  usersControllers
+    .updateUser(id, { status: "Inactive" })
+    .then((data) => {
+      res.status(200).json({ message: `Your user was deleted succesfully` });
+    })
+    .catch((err) => {
+      res.status(400).json({ message: err.message });
+    });
 };
 
 module.exports = {
@@ -161,5 +157,5 @@ module.exports = {
   deleteUser,
   getMyUser,
   patchMyUser,
-  deleteMyUser
+  deleteMyUser,
 };
