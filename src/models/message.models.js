@@ -17,18 +17,19 @@ const Messages = db.define('messages', {
             model: Users
         },
     },
-    conversationId: {
-        type: DataTypes.UUID, //varchar 
-        allowNull: false,
-        field: 'conversation_id',
-        // references: {
-        //     key: 'id',
-        //     model: Conversations
-        // },
-    },
+    // conversationId: {
+    //     type: DataTypes.UUID, //varchar 
+    //     allowNull: false,
+    //     field: 'conversation_id',
+    //     references: {
+    //         key: 'id',
+    //         model: Conversations
+    //     },
+    // },
     message: {
         type: DataTypes.STRING, //varchar 
         allowNull: false,
+        
     }
 })
 
