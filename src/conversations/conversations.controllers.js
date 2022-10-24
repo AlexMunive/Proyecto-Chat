@@ -51,10 +51,11 @@ const createConversation = async (data) => {
   return response;
 };
 
-const updateConversation = async (userId, title ) => {
+const updateConversation = async (userId, title, id) => {
   const result = await Conversations.update(title, {
     where: {
       userId,
+      id,
     },
   });
   return result;
@@ -67,8 +68,6 @@ const deleteConversation = async (title) => {
     },
   });
 };
-
-
 
 module.exports = {
   getConversationByName,

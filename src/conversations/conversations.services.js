@@ -80,7 +80,7 @@ const patchConversation = (req, res) => {
   const userId = req.user.id;
   const title = req.body;
   conversationControllers
-    .updateConversation(userId, title)
+    .updateConversation(userId, id, title)
     .then((data) => {
       if (data[0]) {
         res.status(200).json({ message: `Edited succefully` });
