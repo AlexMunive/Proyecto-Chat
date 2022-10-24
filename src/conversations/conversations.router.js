@@ -22,6 +22,10 @@ router
   .patch(
     passport.authenticate("jwt", { session: false }),
     conversationServices.patchConversation
+  )
+  .delete(
+    passport.authenticate("jwt", { session: false }),
+    conversationServices.deleteConversationById
   );
 
 router
@@ -34,6 +38,9 @@ router
     passport.authenticate("jwt", { session: false }),
     conversationServices.patchConversation
   )
-  .delete(conversationServices.deleteConversation);
+  .delete(
+    passport.authenticate("jwt", { session: false }),
+    conversationServices.deleteConversationByName
+  );
 
 module.exports = router;

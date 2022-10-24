@@ -61,18 +61,31 @@ const updateConversation = async (userId, id, title) => {
   return result;
 };
 
-const deleteConversation = async (title) => {
+const deleteConversationByName = async (userId, title) => {
   const data = await Conversations.destroy({
     where: {
+      userId,
       title,
     },
   });
+  return data;
+};
+
+const deleteConversationById = async (userId, id) => {
+  const data = await Conversations.destroy({
+    where: {
+      userId,
+      id,
+    },
+  });
+  return data;
 };
 
 module.exports = {
   getConversationByName,
   createConversation,
-  deleteConversation,
+  deleteConversationById,
+  deleteConversationByName,
   updateConversation,
   getConversationById,
   getAllConversationsByUser,

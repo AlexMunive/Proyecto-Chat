@@ -1,16 +1,5 @@
 const conversationControllers = require("./conversations.controllers");
 
-// const getAllConversation = (req, res) => {
-//   conversationControllers
-//     .getAllConversation()
-//     .then((response) => {
-//       res.status(200).json(response);
-//     })
-//     .catch((err) => {
-//       res.status(400).json({ message: err.message });
-//     });
-// };
-
 const getMyConversations = (req, res) => {
   const id = req.user.id;
   conversationControllers
@@ -93,10 +82,28 @@ const patchConversation = (req, res) => {
     });
 };
 
-const deleteConversation = (req, res) => {
-  const id = req.params.id;
+const deleteConversationByName = (req, res) => {
+  const title = req.params.title;
+  const userId = req.user.id;
   conversationControllers
-    .deleteConversation(id)
+    .deleteConversationByName(userId, title)
+    .then((data) => {
+      if (data) {
+        res.status(204).json();
+      } else {
+        res.status(404).json({ message: "Invalid Name" });
+      }
+    })
+    .catch((err) => {
+      res.status(400).json({ message: err.message });
+    });
+};
+
+const deleteConversationById = (req, res) => {
+  const id = req.params.id;
+  const userId = req.user.id;
+  conversationControllers
+    .deleteConversationById(userId, id)
     .then((data) => {
       if (data) {
         res.status(204).json();
@@ -125,7 +132,8 @@ module.exports = {
   getConversationByName,
   createConversation,
   patchConversation,
-  deleteConversation,
+  deleteConversationById,
+  deleteConversationByName,
   getMyConversations,
   getConversationByUser,
   getConversationById,
