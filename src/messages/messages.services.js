@@ -11,11 +11,11 @@ const getAllMessages = (req, res) => {
 }
 
 const createMessage = (req, res) => {
-
-    const senderId = req.user.id 
+    //? Este es el id del usuario loggeado
+    const senderId = req.user.id
     const { conversationId, message } = req.body
-    if(senderId && conversationId && message){
-        messageControllers.createMessage({ conversationId, message})
+    if( senderId && conversationId  && message){
+        messageControllers.createMessage(senderId,conversationId, message)
             .then(data => {
                 res.status(201).json(data)
             })
@@ -26,7 +26,7 @@ const createMessage = (req, res) => {
         res.status(400).json({
             message: 'Missing Data',
             fields: {
-                conversationId: 'uuid',
+                conversationId: 'integer',
                 message: 'string'
             }
         })

@@ -5,7 +5,8 @@ const Conversations = require('./conversations.models')
 
 const Messages = db.define('messages', {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
         allowNull: false
     },
@@ -19,7 +20,7 @@ const Messages = db.define('messages', {
         },
     },
     conversationId: {
-        type: DataTypes.INTEGER, //varchar 
+        type: DataTypes.INTEGER, 
         allowNull: false,
         field: 'conversation_id',
         references: {

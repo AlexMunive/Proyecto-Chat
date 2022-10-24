@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 const conversationServices = require("./conversations.services");
+const menssageServices = require('../messages/messages.services')
 
 router
   .route("/")
@@ -27,6 +28,19 @@ router
     passport.authenticate("jwt", { session: false }),
     conversationServices.deleteConversationById
   );
+
+  
+router
+  .route("/:id/message")
+  .get(
+    passport.authenticate("jwt", { session: false }),
+    menssageServices.getAllMessages
+  )
+  .post(
+    passport.authenticate("jwt", { session: false }),
+    menssageServices.createMessage
+  )
+  
 
 router
   .route("/-/:title")
