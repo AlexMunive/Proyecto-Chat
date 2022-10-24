@@ -1,6 +1,17 @@
 const Conversations = require("../models/conversations.models");
 const Users = require("../models/users.models");
 
+<<<<<<< HEAD
+const getAllConversation = async (userId) => {
+  const data = await Conversations.findAll({
+    where:{userId},
+    include: [
+      {
+        model: Users,
+        as: "user",
+      },
+    ],
+=======
 // const getAllConversation = async () => {
 //   const data = await Conversations.findAll({
 //     include: [
@@ -18,6 +29,7 @@ const getAllConversationsByUser = async (userId) => {
     where: {
       userId,
     },
+>>>>>>> 4a5a5eb5809f3af0b08397056606260846de7a3d
   });
   return data;
 };
@@ -67,6 +79,8 @@ const deleteConversation = async (title) => {
     },
   });
 };
+
+
 
 module.exports = {
   getConversationByName,
