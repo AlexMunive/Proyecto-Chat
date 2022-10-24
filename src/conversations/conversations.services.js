@@ -76,7 +76,7 @@ const createConversation = (req, res) => {
 };
 
 const patchConversation = (req, res) => {
-  // const id = req.params.id;
+  const id = req.params.id;
   const userId = req.user.id;
   const title = req.body;
   conversationControllers
