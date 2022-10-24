@@ -6,7 +6,7 @@ router
   .route("/")
   .get(
     passport.authenticate("jwt", { session: false }),
-    conversationServices.getAllConversation
+    conversationServices.getConversationByUser
   )
   .post(
     passport.authenticate("jwt", { session: false }),
@@ -14,16 +14,26 @@ router
   );
 
 router
-  .route("/me")
+  .route("/:id")
   .get(
     passport.authenticate("jwt", { session: false }),
-    conversationServices.getMyConversations
+    conversationServices.getConversationById
+  )
+  .patch(
+    passport.authenticate("jwt", { session: false }),
+    conversationServices.patchConversation
   );
 
 router
-  .route("/:id")
-  .get(conversationServices.getConversationByName)
-  .patch(conversationServices.patchConversation)
+  .route("/-/:title")
+  .get(
+    passport.authenticate("jwt", { session: false }),
+    conversationServices.getConversationByName
+  )
+  .patch(
+    passport.authenticate("jwt", { session: false }),
+    conversationServices.patchConversation
+  )
   .delete(conversationServices.deleteConversation);
 
 module.exports = router;
