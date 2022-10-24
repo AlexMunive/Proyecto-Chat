@@ -1,31 +1,42 @@
 const Conversations = require("../models/conversations.models");
 const Users = require("../models/users.models");
 
-const getAllConversation = async () => {
+// const getAllConversation = async () => {
+//   const data = await Conversations.findAll({
+//     include: [
+//       {
+//         model: Users,
+//         as: "user",
+//       },
+//     ],
+//   });
+//   return data;
+// };
+
+const getAllConversationsByUser = async (userId) => {
   const data = await Conversations.findAll({
-    include: [
-      {
-        model: Users,
-        as: "user",
-      },
-    ],
+    where: {
+      userId,
+    },
   });
   return data;
 };
 
-const getConversationById = async (id) => {
-  const data = await Users.findOne({
+const getConversationById = async (userId, id) => {
+  const data = await Conversations.findOne({
     where: {
+      userId,
       id,
     },
   });
   return data;
 };
 
-const getConversationByName = async (title) => {
-  const data = await Conversations.findOne({
+const getConversationByName = async (title, userId) => {
+  const data = await Conversations.findAll({
     where: {
       title,
+      userId,
     },
   });
   return data;
@@ -40,10 +51,11 @@ const createConversation = async (data) => {
   return response;
 };
 
-const updateConversation = async (title, data) => {
-  const result = await Conversations.update(data, {
+const updateConversation = async (id,userId, title ) => {
+  const result = await Conversations.update(title, {
     where: {
-      title,
+      id,
+      userId,
     },
   });
   return result;
@@ -58,10 +70,10 @@ const deleteConversation = async (title) => {
 };
 
 module.exports = {
-  getAllConversation,
   getConversationByName,
   createConversation,
   deleteConversation,
   updateConversation,
   getConversationById,
+  getAllConversationsByUser,
 };
