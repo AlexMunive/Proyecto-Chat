@@ -51,7 +51,7 @@ const createConversation = async (data) => {
   return response;
 };
 
-const updateConversation = async (userId, title, id) => {
+const updateConversation = async (userId, id, title) => {
   const result = await Conversations.update(title, {
     where: {
       userId,
