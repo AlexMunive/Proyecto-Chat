@@ -74,12 +74,13 @@ const createConversation = (req, res) => {
     });
   }
 };
+
 const patchConversation = (req, res) => {
-  const id = req.params.id;
+  // const id = req.params.id;
   const userId = req.user.id;
   const title = req.body;
   conversationControllers
-    .updateConversation(id, title)
+    .updateConversation(userId, title)
     .then((data) => {
       if (data[0]) {
         res.status(200).json({ message: `Edited succefully` });

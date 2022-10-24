@@ -51,10 +51,9 @@ const createConversation = async (data) => {
   return response;
 };
 
-const updateConversation = async (id,userId, title ) => {
+const updateConversation = async (userId, title ) => {
   const result = await Conversations.update(title, {
     where: {
-      id,
       userId,
     },
   });
