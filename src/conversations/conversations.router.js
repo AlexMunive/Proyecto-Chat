@@ -1,9 +1,24 @@
 const router = require("express").Router();
+const passport = require("passport");
 const conversationServices = require("./conversations.services");
 
-router.get("/", conversationServices.getAllConversation);
+router
+  .route("/")
+  .get(
+    passport.authenticate("jwt", { session: false }),
+    conversationServices.getAllConversation
+  )
+  .post(
+    passport.authenticate("jwt", { session: false }),
+    conversationServices.createConversation
+  );
 
-router.post("/", conversationServices.createConversation);
+router
+  .route("/me")
+  .get(
+    passport.authenticate("jwt", { session: false }),
+    conversationServices.getMyConversations
+  );
 
 router
   .route("/:id")

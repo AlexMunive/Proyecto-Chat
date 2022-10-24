@@ -11,6 +11,18 @@ const getAllConversation = (req, res) => {
     });
 };
 
+const getMyConversations = (req, res) => {
+  const id = req.user.id;
+  conversationControllers
+    .getConversationById(id)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(400).json({ message: err.message });
+    });
+};
+
 const getConversationByName = (req, res) => {
   const id = req.params.id;
   conversationControllers
@@ -24,11 +36,11 @@ const getConversationByName = (req, res) => {
 };
 
 const createConversation = (req, res) => {
-  const id = req.user.id;
+  const userId = req.user.id;
   const { title, imageUrl } = req.body;
   if (title) {
     conversationControllers
-      .createConversation({ title, imageUrl, id })
+      .createConversation({ title, imageUrl, userId })
       .then((data) => {
         res.status(201).json(data);
       })
@@ -89,4 +101,5 @@ module.exports = {
   createConversation,
   patchConversation,
   deleteConversation,
+  getMyConversations,
 };
