@@ -12,7 +12,7 @@ const Participants = db.define('participants', {
         allowNull: false
     },
     conversationId: {
-        type: DataTypes.UUID, //varchar 
+        type: DataTypes.INTEGER, //varchar 
         allowNull: false,
         field: 'conversation_id',
         references: {

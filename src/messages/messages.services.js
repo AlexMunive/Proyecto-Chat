@@ -1,7 +1,9 @@
 const messageControllers = require('./messages.controllers')
 
 const getAllMessages = (req, res) => {
-    messageControllers.getAllMessages()
+    const senderId = req.user.id
+    const conversationId= req.params.id
+    messageControllers.getAllMessages(senderId,conversationId)
         .then(data => {
             res.status(200).json(data)
         })
@@ -15,8 +17,8 @@ const createMessage = (req, res) => {
     const senderId = req.user.id
     const conversationId= req.params.id
     const { message } = req.body
-    if(conversationId && senderId && message){
-        messageControllers.createMessage(conversationId,senderId, message)
+    if(senderId && conversationId && message ){
+        messageControllers.createMessage(senderId,conversationId,message)
             .then(data => {
                 res.status(201).json(data)
             })

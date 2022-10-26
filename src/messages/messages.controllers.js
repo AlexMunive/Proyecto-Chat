@@ -6,8 +6,12 @@ const { INTEGER } = require('sequelize')
 // const Conversations = require('../models/conversations')
 
 
-const getAllMessages = async() => {
+const getAllMessages = async(senderId, conversationId) => {
     const data = await Messages.findAll({
+        where: {
+            senderId,
+            conversationId
+          },
     })
     return data
 }
@@ -22,11 +26,11 @@ const getMessageById = async(id) => {
 
 }
 
-const createMessage = async (conversationId,senderId,message) => {
+const createMessage = async (senderId,conversationId,message) => {
     const response = await Messages.create({
+        senderId: senderId, 
         conversationId: conversationId, 
-        senderId: senderId,      
-        message: message,
+        message: message,     
        
     })
     return response
