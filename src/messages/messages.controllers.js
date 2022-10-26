@@ -9,7 +9,7 @@ const { INTEGER } = require('sequelize')
 const getAllMessages = async(senderId, conversationId) => {
     const data = await Messages.findAll({
         where: {
-            senderId,
+            // senderId,
             conversationId
           },
     })
