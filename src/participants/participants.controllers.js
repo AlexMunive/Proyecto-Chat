@@ -15,10 +15,11 @@ const getAllParticipant = async () => {
     return data;
   };
 
-  const createParticipant = async (data) => {
+
+  const addParticipant = async (conversationId, userId) => {
     const response = await Participants.create({
-      conversationId: data.conversationId,
-      userId: data.userId,
+      conversationId: conversationId,
+      userId: userId,
     });
     return response;
   };
@@ -28,5 +29,5 @@ const getAllParticipant = async () => {
 module.exports= {
     getAllParticipant,
     getParticipantById,
-    createParticipant
+    addParticipant
 }

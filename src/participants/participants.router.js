@@ -9,3 +9,9 @@ router.route('/')
         passport.authenticate('jwt', {session: false}),
         participantsServices.getAllParticipants
         )
+
+
+
+
+
+module.exports = router
