@@ -2,6 +2,7 @@ const router = require("express").Router();
 const passport = require("passport");
 const conversationServices = require("./conversations.services");
 const menssageServices = require('../messages/messages.services')
+const participantsServices= require('../participants/participants.services')
 
 router
   .route("/")
@@ -39,6 +40,16 @@ router
   .post(
     passport.authenticate("jwt", { session: false }),
     menssageServices.createMessage
+  )
+router
+  .route("/:id/participant")
+  .get(
+    passport.authenticate("jwt", { session: false }),
+    participantsServices.getAllParticipants
+  )
+  .post(
+    passport.authenticate("jwt", { session: false }),
+    participantsServices.addParticipant
   )
   
 

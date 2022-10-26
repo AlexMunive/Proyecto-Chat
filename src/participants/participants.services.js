@@ -23,12 +23,12 @@ const getParticipantById = (req, res) => {
 };
 
 
-const createParticipant = (req, res) => {
+const addParticipant = (req, res) => {
     const userId = req.user.id;
-    const conversationId = req.user.id
-    if (id) {
+    const conversationId = req.params.id
+    if (userId,conversationId) {
         participantsControllers
-            .createParticipant({ userId, conversationId })
+            .addParticipant(userId, conversationId)
             .then((data) => {
                 res.status(201).json(data);
             })
@@ -38,6 +38,9 @@ const createParticipant = (req, res) => {
     } else {
         res.status(400).json({
             message: "missing data",
+            fields: {
+                userId: "string",
+              }
         });
     }
 };
@@ -47,5 +50,5 @@ const createParticipant = (req, res) => {
 module.exports = {
     getAllParticipants,
     getParticipantById,
-    createParticipant
+    addParticipant
 }
