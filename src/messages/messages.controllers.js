@@ -22,11 +22,11 @@ const getMessageById = async(id) => {
 
 }
 
-const createMessage = async (senderId,conversationId,message) => {
+const createMessage = async (conversationId,senderId,message) => {
     const response = await Messages.create({
-        senderId: senderId,
-        conversationId: conversationId,        
-        message: message
+        conversationId: conversationId, 
+        senderId: senderId,      
+        message: message,
        
     })
     return response

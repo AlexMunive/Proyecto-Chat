@@ -11,7 +11,7 @@ const Messages = db.define('messages', {
         allowNull: false
     },
     senderId: {
-        type: DataTypes.UUID, //varchar 
+        type: DataTypes.UUID, 
         allowNull: false,
         field: 'sender_id',
         references: {
