@@ -1,3 +1,4 @@
+const { addParticipant } = require("../participants/participants.controllers");
 const conversationControllers = require("./conversations.controllers");
 
 const getMyConversations = (req, res) => {
@@ -41,11 +42,14 @@ const getConversationById = (req, res) => {
 
 const createConversation = (req, res) => {
   const userId = req.user.id;
-  const { title, imageUrl } = req.body;
-  if (title) {
+
+  const { title, imageUrl, participantId } = req.body;
+  if (title && participantId) {
     conversationControllers
       .createConversation({ title, imageUrl, userId })
       .then((data) => {
+        addParticipant(data.id, userId);
+        addParticipant(data.id, participantId);
         res.status(201).json(data);
       })
       .catch((err) => {
